@@ -1,3 +1,4 @@
+import uuid
 import chromadb
 from sentence_transformers import SentenceTransformer
 
@@ -19,17 +20,16 @@ def save_embeddings(chunks):
     metadatas = []
     ids = []
 
-    for i, chunk in enumerate(chunks):
-
+    for chunk in chunks:
+        
         embedding = model.encode(chunk["text"]).tolist()
 
         documents.append(chunk["text"])
         embeddings.append(embedding)
         metadatas.append(chunk["metadata"])
 
-        ids.append(
-            f'{chunk["metadata"]["source"]}_{chunk["metadata"]["page"]}_{i}'
-        )
+        # ID unik
+        ids.append(str(uuid.uuid4()))
 
     collection.add(
         ids=ids,

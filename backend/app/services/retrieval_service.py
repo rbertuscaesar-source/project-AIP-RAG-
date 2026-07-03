@@ -18,7 +18,8 @@ def search_documents(query: str, top_k: int = 5):
 
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=top_k
+        n_results=top_k,
+        include=["documents", "metadatas", "distances"]
     )
 
     response = []
@@ -28,7 +29,6 @@ def search_documents(query: str, top_k: int = 5):
     distances = results.get("distances", [[]])[0]
 
     for doc, meta, distance in zip(documents, metadatas, distances):
-
         response.append({
             "text": doc,
             "metadata": meta,
@@ -36,3 +36,15 @@ def search_documents(query: str, top_k: int = 5):
         })
 
     return response
+
+
+def get_context(query: str):
+
+    results = search_documents(query)
+
+    if not results or results[0]["score"] > 0.8:  # Threshold untuk relevansi
+        return "", []
+
+    context = "\n\n".join(item["text"] for item in results)
+
+    return context, results

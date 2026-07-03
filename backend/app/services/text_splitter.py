@@ -1,17 +1,18 @@
-def split_text(text, chunk_size=500, overlap=100):
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-    chunks = []
 
-    start = 0
+def split_text(text: str):
 
-    while start < len(text):
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=100,
+        separators=[
+            "\n\n",
+            "\n",
+            ". ",
+            " ",
+            ""
+        ]
+    )
 
-        end = start + chunk_size
-
-        chunk = text[start:end]
-
-        chunks.append(chunk)
-
-        start += chunk_size - overlap
-
-    return chunks
+    return splitter.split_text(text)

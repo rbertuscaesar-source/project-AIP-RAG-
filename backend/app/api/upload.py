@@ -11,6 +11,7 @@ from app.services.document_loader import (
 
 from app.services.text_splitter import split_text
 from app.services.embedding_service import save_embeddings
+from app.services.text_splitter import split_text
 
 router = APIRouter()
 
