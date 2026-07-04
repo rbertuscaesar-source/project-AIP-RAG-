@@ -1,29 +1,34 @@
-def build_prompt(question: str, context: str):
+def build_prompt(question, context, history):
 
-    return f"""
-Anda adalah AI Assistant untuk dokumen perusahaan.
+    conversation = ""
 
-ATURAN:
-1. Jawab HANYA berdasarkan context.
-2. Jangan menambahkan informasi di luar context.
-3. Jika jawaban tidak ada pada context, jawab:
-   "Maaf, saya tidak menemukan informasi tersebut pada dokumen."
-4. Gunakan Bahasa Indonesia.
-5. Jelaskan secara singkat dan jelas.
+    for item in history:
 
-======================
-CONTEXT
-======================
+        conversation += f"{item['role']}: {item['content']}\n"
+
+    prompt = f"""
+Anda adalah AI Assistant.
+
+Gunakan hanya informasi dari context.
+
+Jika jawabannya tidak ada pada context,
+jawab:
+
+Maaf, saya tidak menemukan informasi tersebut pada dokumen.
+
+Riwayat Percakapan:
+
+{conversation}
+
+Context:
 
 {context}
 
-======================
-PERTANYAAN
-======================
+Pertanyaan:
 
 {question}
 
-======================
-JAWABAN
-======================
+Jawaban:
 """
+
+    return prompt

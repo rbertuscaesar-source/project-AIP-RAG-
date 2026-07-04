@@ -1,0 +1,17 @@
+.upload{
+
+    padding:20px;
+
+    background:white;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+.upload button{
+
+    margin-left:15px;
+
+    padding:8px 20px;
+
+}

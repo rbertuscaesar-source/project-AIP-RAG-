@@ -12,6 +12,7 @@ from app.services.document_loader import (
 from app.services.text_splitter import split_text
 from app.services.embedding_service import save_embeddings
 from app.services.text_splitter import split_text
+from app.services.bm25_service import build_bm25
 
 router = APIRouter()
 
@@ -70,6 +71,9 @@ async def upload_file(file: UploadFile = File(...)):
 
     # Simpan embedding ke ChromaDB
     total_saved = save_embeddings(all_chunks)
+    from app.services.bm25_service import build_bm25
+
+    build_bm25(all_chunks)
 
     return {
         "status": "success",

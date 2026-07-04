@@ -1,0 +1,25 @@
+.sidebar{
+
+    width:260px;
+
+    background:white;
+
+    border-right:1px solid #ddd;
+
+    padding:20px;
+
+}
+
+.sidebar h3{
+
+    margin-bottom:15px;
+
+}
+
+.sidebar p{
+
+    margin-top:20px;
+
+    color:#666;
+
+}

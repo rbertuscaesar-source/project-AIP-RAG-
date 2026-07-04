@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from app.services.retrieval_service import search_documents
+from app.services.retrieval_service import get_context
 
 router = APIRouter()
 
@@ -13,9 +13,10 @@ class SearchRequest(BaseModel):
 @router.post("/search")
 def search(request: SearchRequest):
 
-    results = search_documents(request.question)
+    context, sources = get_context(request.question)
 
     return {
         "question": request.question,
-        "results": results
+        "context": context,
+        "sources": sources
     }
