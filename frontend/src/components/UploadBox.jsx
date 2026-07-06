@@ -1,65 +1,61 @@
-import { useState } from "react";
-import "./UploadBox.css";
-import api from "../services/api";
+// src/components/UploadBox.jsx
+
+import { useState } from 'react';
+import { uploadFile } from '../services/api';
+import './UploadBox.css';
 
 function UploadBox() {
-
     const [file, setFile] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+        setMessage('');
+    };
 
     const handleUpload = async () => {
-
         if (!file) {
-            alert("Pilih file terlebih dahulu.");
+            setMessage('Pilih file terlebih dahulu');
             return;
         }
 
-        const formData = new FormData();
-
-        formData.append("file", file);
+        setUploading(true);
+        setMessage('');
 
         try {
-
-            const response = await api.post(
-                "/upload",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                }
-            );
-
-            alert(response.data.status);
-
+            const response = await uploadFile(file);
+            setMessage(`✅ ${response.data.message}`);
+            setFile(null);
+            // Refresh sidebar
+            if (window.refreshSidebar) window.refreshSidebar();
         } catch (error) {
-
-            console.error(error);
-
-            alert("Upload gagal.");
-
+            const detail = error.response?.data?.detail || 'Upload gagal';
+            setMessage(`❌ ${detail}`);
+        } finally {
+            setUploading(false);
         }
-
     };
 
     return (
-
-        <div className="upload">
-
-            <input
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}
-            />
-
-            <button onClick={handleUpload}>
-
-                Upload
-
-            </button>
-
+        <div className="upload-box">
+            <div className="upload-content">
+                <div className="upload-icon">📤</div>
+                <h4>Upload Dokumen</h4>
+                <div className="upload-input-group">
+                    <label className="upload-label">
+                        <span>Pilih File</span>
+                        <input type="file" onChange={handleFileChange} accept=".pdf,.docx,.txt" />
+                    </label>
+                    <button onClick={handleUpload} disabled={!file || uploading}>
+                        {uploading ? '⏳ Uploading...' : 'Upload'}
+                    </button>
+                </div>
+                {file && <span className="file-name">📎 {file.name}</span>}
+                {message && <span className={`upload-message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</span>}
+            </div>
         </div>
-
     );
-
 }
 
 export default UploadBox;

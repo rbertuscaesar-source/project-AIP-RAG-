@@ -1,31 +1,119 @@
-.input-area{
+/* src/components/InputBox.css */
 
-    display:flex;
-
-    padding:20px;
-
-    background:white;
-
-    border-top:1px solid #ddd;
-
-    gap:10px;
-
+.input-container {
+    padding: 12px 20px 16px 20px;
+    background: #ffffff;
+    border-top: 1px solid #edf2f7;
+    flex-shrink: 0;
 }
 
-.input-area input{
-
-    flex:1;
-
-    padding:12px;
-
-    border:1px solid #ccc;
-
-    border-radius:6px;
-
+.input-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 4px 4px 4px 16px;
+    transition: all 0.3s;
 }
 
-.input-area button{
+.input-wrapper:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
 
-    padding:12px 20px;
+.input-box {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    min-height: 44px;
+    max-height: 100px;
+    color: #2d3748;
+}
 
+.input-box::placeholder {
+    color: #a0aec0;
+}
+
+.input-box:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.send-btn {
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+    min-height: 44px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.send-btn:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.send-btn.loading {
+    background: #a0aec0;
+}
+
+.send-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .input-container {
+        padding: 8px 12px 12px 12px;
+    }
+    
+    .input-wrapper {
+        padding: 2px 2px 2px 12px;
+        border-radius: 12px;
+    }
+    
+    .input-box {
+        font-size: 13px;
+        min-height: 38px;
+        padding: 8px 0;
+    }
+    
+    .send-btn {
+        min-height: 38px;
+        min-width: 42px;
+        padding: 8px 12px;
+        border-radius: 10px;
+    }
 }

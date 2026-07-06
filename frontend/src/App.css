@@ -1,23 +1,54 @@
-.app{
+/* src/App.css */
 
-    height:100vh;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.content{
-
-    display:flex;
-
-    height:calc(100vh - 70px);
-
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
 }
 
-.main{
+.content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
 
-    flex:1;
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 20px 0 0 0;
+    margin: 8px 8px 8px 0;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.05);
+}
 
-    display:flex;
+/* ===== SCROLLBAR GLOBAL ===== */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
 
-    flex-direction:column;
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
 
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46a1 100%);
 }

@@ -1,17 +1,118 @@
-.upload{
+/* src/components/UploadBox.css */
 
-    padding:20px;
-
-    background:white;
-
-    border-bottom:1px solid #ddd;
-
+.upload-box {
+    padding: 12px 20px;
+    background: #f7fafc;
+    border-bottom: 1px solid #edf2f7;
+    flex-shrink: 0;
 }
 
-.upload button{
+.upload-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
-    margin-left:15px;
+.upload-icon {
+    font-size: 24px;
+}
 
-    padding:8px 20px;
+.upload-content h4 {
+    font-size: 14px;
+    color: #2d3748;
+    margin: 0;
+    font-weight: 600;
+}
 
+.upload-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.upload-label {
+    background: white;
+    padding: 6px 14px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+    color: #4a5568;
+    transition: all 0.2s;
+}
+
+.upload-label:hover {
+    border-color: #667eea;
+    background: #f7fafc;
+}
+
+.upload-label input {
+    display: none;
+}
+
+.upload-input-group button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.upload-input-group button:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.upload-input-group button:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.file-name {
+    font-size: 13px;
+    color: #4a5568;
+}
+
+.upload-message {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.upload-message.success {
+    color: #38a169;
+}
+
+.upload-message.error {
+    color: #e53e3e;
+}
+
+@media (max-width: 768px) {
+    .upload-box {
+        padding: 8px 12px;
+    }
+    
+    .upload-content {
+        gap: 8px;
+    }
+    
+    .upload-content h4 {
+        font-size: 12px;
+    }
+    
+    .upload-label {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+    
+    .upload-input-group button {
+        font-size: 12px;
+        padding: 4px 14px;
+    }
 }
