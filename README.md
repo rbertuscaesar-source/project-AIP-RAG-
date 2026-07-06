@@ -40,7 +40,8 @@ cd project-AIP-RAG-
 **2. Backend**
 **Create virtual environment**
 -> python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate
+Windows: venv\Scripts\activate
 
 **Install dependencies**
 -> pip install -r requirements.txt
@@ -57,8 +58,9 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 
 **4. Ollama (LLM)**
 Make sure Ollama is installed and the Gemma2:2b model is pulled:
+
 **Install Ollama (https://ollama.ai)**
-ollama pull gemma2:2b
+-> ollama pull gemma2:2b
 
 **5. Open Application**
 http://localhost:5173
