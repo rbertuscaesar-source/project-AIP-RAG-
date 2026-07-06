@@ -39,21 +39,21 @@ cd project-AIP-RAG-
 
 **2. Backend**
 **Create virtual environment**
-python -m venv venv
+-> python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 **Install dependencies**
-pip install -r requirements.txt
+-> pip install -r requirements.txt
 
 **Run server**
-uvicorn main:app --reload
+-> uvicorn main:app --reload
 
 **3. Frontend**
 **Install dependencies**
-npm install
+-> npm install
 
 **Run development server**
-npm run dev
+-> npm run dev
 
 **4. Ollama (LLM)**
 Make sure Ollama is installed and the Gemma2:2b model is pulled:
