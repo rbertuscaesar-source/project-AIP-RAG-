@@ -15,7 +15,7 @@ Enterprise RAG Assistant is an AI-powered **Retrieval-Augmented Generation (RAG)
 
 ## 🛠️ Tech Stack
 
-### Backend
+## Backend
 - **FastAPI** - Python API Framework
 - **Ollama** - Local LLM (Gemma2:2b)
 - **ChromaDB** - Vector Database
@@ -38,26 +38,26 @@ git clone https://github.com/username/project-AIP-RAG-.git
 cd project-AIP-RAG-
 
 **2. Backend**
-# Create virtual environment
+**Create virtual environment**
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install dependencies
+**Install dependencies**
 pip install -r requirements.txt
 
-# Run server
+**Run server**
 uvicorn main:app --reload
 
 **3. Frontend**
-# Install dependencies
+**Install dependencies**
 npm install
 
-# Run development server
+**Run development server**
 npm run dev
 
 **4. Ollama (LLM)**
 Make sure Ollama is installed and the Gemma2:2b model is pulled:
-# Install Ollama (https://ollama.ai)
+**Install Ollama (https://ollama.ai)**
 ollama pull gemma2:2b
 
 **5. Open Application**
