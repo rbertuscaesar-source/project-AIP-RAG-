@@ -28,46 +28,11 @@ Enterprise RAG Assistant is an AI-powered **Retrieval-Augmented Generation (RAG)
 - **Axios** - HTTP Client
 - **CSS3** - Modern styling
 
-## 📁 Project Structure
-project-AIP-RAG-/
-├── backend/
-│ ├── app/
-│ │ ├── api/
-│ │ │ ├── upload.py # Document upload
-│ │ │ ├── chat.py # Chat endpoint
-│ │ │ ├── export.py # Export history
-│ │ │ ├── documents.py # Document management
-│ │ │ └── search.py # Search endpoint
-│ │ ├── services/
-│ │ │ ├── llm_service.py # Ollama + Gemma
-│ │ │ ├── memory_service.py # Chat history
-│ │ │ ├── retrieval_service.py # Hybrid search
-│ │ │ ├── embedding_service.py # ChromaDB
-│ │ │ ├── document_loader.py # File reader
-│ │ │ ├── text_splitter.py # Chunking
-│ │ │ └── bm25_service.py # BM25 index
-│ │ └── main.py
-│ └── requirements.txt
-├── frontend/
-│ ├── src/
-│ │ ├── components/
-│ │ │ ├── ChatBox.jsx
-│ │ │ ├── Sidebar.jsx
-│ │ │ ├── UploadBox.jsx
-│ │ │ ├── InputBox.jsx
-│ │ │ └── Header.jsx
-│ │ ├── services/
-│ │ │ └── api.js
-│ │ ├── App.jsx
-│ │ └── main.jsx
-│ ├── package.json
-│ └── vite.config.js
-└── uploads/ # Uploaded files folder
 
 
 ## 🚀 Installation & Running
 
-### 1. Clone Repository
+**1. Clone Repository**
 
 git clone https://github.com/username/project-AIP-RAG-.git
 cd project-AIP-RAG-
