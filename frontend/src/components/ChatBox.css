@@ -31,13 +31,13 @@
 .user-message {
     align-self: flex-end;
     max-width: 70%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #666aea 0%, #8e12c7 100%);
     color: white;
     padding: 12px 18px;
     border-radius: 20px 20px 4px 20px;
     margin: 4px 0;
     word-wrap: break-word;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(22, 57, 212, 0.3);
 }
 
 .user-message .message-sender {
@@ -55,7 +55,7 @@
 .assistant-message {
     align-self: flex-start;
     max-width: 80%;
-    background: white;
+    background: linear-gradient(135deg, #dbe7de 0%, #25cc5a 100%);
     color: #2d3748;
     padding: 14px 20px;
     border-radius: 20px 20px 20px 4px;
