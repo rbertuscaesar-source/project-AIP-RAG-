@@ -18,7 +18,7 @@ Enterprise RAG Assistant is an AI-powered **Retrieval-Augmented Generation (RAG)
 ## Backend
 - **FastAPI** - Python API Framework
 - **Ollama** - Local LLM (Gemma2:2b)
-- **ooogle** - Gemini API
+- **Google** - Gemini API
 - **ChromaDB** - Vector Database
 - **Sentence-Transformers** - Embedding (all-MiniLM-L6-v2)
 - **BM25** - Keyword Search (rank-bm25)
