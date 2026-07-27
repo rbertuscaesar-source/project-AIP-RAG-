@@ -1,53 +1,103 @@
 # app/services/llm_service.py
 
-import ollama
+import os
 import re
+import google.generativeai as genai
 
+# ============================================
+# 1. KONFIGURASI GEMINI API
+# ============================================
+
+# Ambil API key dari environment variable
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    print("⚠️ GEMINI_API_KEY tidak ditemukan di environment variable.")
+    print("📝 Silakan set GEMINI_API_KEY di file .env atau environment.")
+    # Fallback: bisa pakai Ollama jika Gemini tidak tersedia
+    # raise ValueError("GEMINI_API_KEY environment variable not set")
+
+# Konfigurasi Gemini
+genai.configure(api_key=GEMINI_API_KEY)
+
+# Pilih model (gratis dan cepat)
+# Pilihan model: "gemini-2.5-flash" (terbaru), "gemini-1.5-flash", "gemini-2.5-pro"
+MODEL_NAME = "gemini-2.5-flash"  # Bisa ganti ke "gemini-1.5-flash" atau "gemini-2.5-pro"
+
+if GEMINI_API_KEY:
+    model = genai.GenerativeModel(MODEL_NAME)
+    print(f"✅ Gemini API siap menggunakan model: {MODEL_NAME}")
+else:
+    model = None
+    print("⚠️ Gemini API tidak aktif. Gunakan fallback atau set API key.")
+
+
+# ============================================
+# 2. FUNGSI UTAMA GENERATE ANSWER
+# ============================================
 
 def generate_answer(question: str, context: str, history: list) -> str:
     """
-    Generate jawaban menggunakan Ollama dengan model Gemma2:2b
+    Generate jawaban menggunakan Google Gemini API.
     """
     
+    # Jika Gemini tidak aktif, coba fallback ke Ollama (jika ada)
+    if model is None:
+        print("⚠️ Gemini tidak aktif, coba fallback ke Ollama...")
+        try:
+            # Coba panggil Ollama sebagai fallback
+            import ollama
+            response = ollama.chat(
+                model="gemma2:2b",
+                messages=[{"role": "user", "content": build_prompt_optimized(question, context, history)}],
+                options={"temperature": 0.2, "num_predict": 800}
+            )
+            raw_answer = response["message"]["content"]
+            cleaned_answer = clean_gemma_answer(raw_answer)
+            return force_step_numbering(cleaned_answer)
+        except:
+            return "Maaf, terjadi kesalahan: API Gemini tidak aktif dan fallback Ollama gagal."
+    
+    # Build prompt
     prompt = build_prompt_optimized(question, context, history)
     
     try:
-        response = ollama.chat(
-            model="gemma2:2b",
-            messages=[
-                {
-                    "role": "system",
-                    "content": get_system_prompt()
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            options={
-                "temperature": 0.2,
-                "top_p": 0.8,
-                "num_predict": 800,
-                "repeat_penalty": 1.1,
-            }
-        )
+        # Panggil Gemini API
+        response = model.generate_content(prompt)
+        raw_answer = response.text
         
-        raw_answer = response["message"]["content"]
+        # Clean dan format (pakai fungsi yang sudah ada)
         cleaned_answer = clean_gemma_answer(raw_answer)
-        
-        # 🔥 FORMAT ULANG DARI BACKEND
         formatted_answer = force_step_numbering(cleaned_answer)
         
         return formatted_answer
         
     except Exception as e:
-        print(f"❌ Error generating answer: {str(e)}")
-        return f"Maaf, terjadi kesalahan saat memproses jawaban: {str(e)}"
+        print(f"❌ Error generating answer with Gemini: {str(e)}")
+        
+        # Coba fallback jika Gemini gagal
+        try:
+            import ollama
+            print("🔄 Coba fallback ke Ollama...")
+            response = ollama.chat(
+                model="gemma2:2b",
+                messages=[{"role": "user", "content": build_prompt_optimized(question, context, history)}],
+                options={"temperature": 0.2, "num_predict": 800}
+            )
+            raw_answer = response["message"]["content"]
+            cleaned_answer = clean_gemma_answer(raw_answer)
+            return force_step_numbering(cleaned_answer)
+        except:
+            return f"Maaf, terjadi kesalahan saat memproses jawaban: {str(e)}"
 
+
+# ============================================
+# 3. SYSTEM PROMPT (SAMA SEPERTI SEBELUMNYA)
+# ============================================
 
 def get_system_prompt() -> str:
     """
-    System prompt yang dioptimalkan untuk Gemma2:2b
+    System prompt yang dioptimalkan.
     """
     return """
 Anda adalah asisten AI yang membantu menjawab pertanyaan tentang SOP universitas.
@@ -72,9 +122,13 @@ JANGAN gunakan format lain!
 """
 
 
+# ============================================
+# 4. BUILD PROMPT (SAMA SEPERTI SEBELUMNYA)
+# ============================================
+
 def build_prompt_optimized(question: str, context: str, history: list) -> str:
     """
-    Build prompt yang dioptimalkan untuk Gemma2:2b
+    Build prompt yang dioptimalkan.
     """
     
     history_text = ""
@@ -115,9 +169,13 @@ Catatan:
     return prompt
 
 
+# ============================================
+# 5. FUNGSI FORMATTING (SAMA SEPERTI SEBELUMNYA)
+# ============================================
+
 def force_step_numbering(text: str) -> str:
     """
-    🔥 MEMAKSA FORMAT NOMOR LANGKAH DARI BACKEND
+    MEMAKSA FORMAT NOMOR LANGKAH DARI BACKEND
     """
     if not text:
         return text
@@ -130,7 +188,6 @@ def force_step_numbering(text: str) -> str:
     has_title = False
     title = ""
     
-    # 🔥 Keyword untuk mendeteksi langkah
     step_keywords = [
         'mengajukan', 'melakukan', 'verifikasi', 'pengajuan', 'proses', 
         'login', 'upload', 'isi', 'pilih', 'masuk', 'daftar', 'memesan',
@@ -145,14 +202,12 @@ def force_step_numbering(text: str) -> str:
         if not trimmed:
             continue
         
-        # 🔥 Deteksi judul (yang pakai **)
         if trimmed.startswith('**') and trimmed.endswith('**'):
             has_title = True
             title = trimmed
             result.append(title)
             continue
         
-        # 🔥 Deteksi "Langkah-langkah:" atau "Catatan:"
         lower = trimmed.lower()
         if 'langkah-langkah' in lower or 'langkah langkah' in lower:
             continue
@@ -160,7 +215,6 @@ def force_step_numbering(text: str) -> str:
             is_note_section = True
             continue
         
-        # 🔥 Jika di section catatan
         if is_note_section:
             clean = trimmed
             if clean.startswith('•'):
@@ -173,7 +227,6 @@ def force_step_numbering(text: str) -> str:
                 note_items.append(clean)
             continue
         
-        # 🔥 Jika ini bullet point, ubah jadi langkah
         clean = trimmed
         if clean.startswith('•'):
             clean = clean[1:].strip()
@@ -182,24 +235,19 @@ def force_step_numbering(text: str) -> str:
         if clean.startswith('*'):
             clean = clean[1:].strip()
         
-        # 🔥 Hapus nomor yang sudah ada
         if re.match(r'^\d+\.', clean):
             clean = re.sub(r'^\d+\.\s*', '', clean)
         
-        # 🔥 Deteksi apakah ini langkah
         is_step = False
         
-        # Cek dengan keyword
         for kw in step_keywords:
             if kw in clean.lower():
                 is_step = True
                 break
         
-        # Jika panjang > 30 karakter dan bukan catatan, anggap langkah
         if len(clean) > 30 and not clean.lower().startswith('catatan'):
             is_step = True
         
-        # 🔥 Jika ini kalimat yang mengandung "melalui", "dengan", "untuk"
         if any(word in clean.lower() for word in ['melalui', 'dengan', 'untuk', 'pada', 'ke']):
             if len(clean) > 25:
                 is_step = True
@@ -210,10 +258,8 @@ def force_step_numbering(text: str) -> str:
             if clean and not clean.lower().startswith('catatan'):
                 note_items.append(clean)
     
-    # 🔥 Bangun hasil akhir
     final_lines = []
     
-    # Tambahkan judul
     if has_title:
         final_lines.append(title)
     else:
@@ -221,21 +267,17 @@ def force_step_numbering(text: str) -> str:
     
     final_lines.append('')
     
-    # 🔥 TAMBAHKAN LANGKAH-LANGKAH (WAJIB)
     if step_items:
         final_lines.append('**Langkah-langkah:**')
         for i, item in enumerate(step_items, 1):
-            # Pastikan item tidak dimulai dengan "Catatan:"
             if item.lower().startswith('catatan:'):
                 continue
             final_lines.append(f'{i}. {item}')
         final_lines.append('')
     
-    # Tambahkan catatan
     if note_items:
         final_lines.append('**Catatan:**')
         for item in note_items:
-            # Hapus bullet yang sudah ada
             clean_note = item
             if clean_note.startswith('•'):
                 clean_note = clean_note[1:].strip()
@@ -246,17 +288,12 @@ def force_step_numbering(text: str) -> str:
             if clean_note:
                 final_lines.append(f'• {clean_note}')
     
-    # 🔥 Gabungkan
     result_text = '\n'.join(final_lines)
     
-    # 🔥 Hapus duplikasi
     result_text = re.sub(r'\*\*Langkah-langkah:\*\*\s*\*\*Langkah-langkah:\*\*', '**Langkah-langkah:**', result_text)
     result_text = re.sub(r'\*\*Catatan:\*\*\s*\*\*Catatan:\*\*', '**Catatan:**', result_text)
-    
-    # 🔥 Hapus "Catatan:" yang ada di tengah langkah
     result_text = re.sub(r'\d+\.\s*Catatan:', '', result_text, flags=re.IGNORECASE)
     
-    # 🔥 Jika tidak ada "Langkah-langkah:" tapi ada step_items, tambahkan
     if step_items and '**Langkah-langkah:**' not in result_text:
         lines2 = result_text.split('\n')
         new_lines = []
@@ -278,11 +315,14 @@ def force_step_numbering(text: str) -> str:
     return result_text.strip()
 
 
+# ============================================
+# 6. FUNGSI CLEANING (SAMA SEPERTI SEBELUMNYA)
+# ============================================
+
 def clean_gemma_answer(answer: str) -> str:
     """
-    Membersihkan jawaban dari Gemma
+    Membersihkan jawaban.
     """
-    # Hapus kata pengantar
     patterns = [
         r'^Berdasarkan konteks,?',
         r'^Dari konteks,?',
@@ -295,7 +335,6 @@ def clean_gemma_answer(answer: str) -> str:
     for p in patterns:
         answer = re.sub(p, '', answer, flags=re.IGNORECASE)
     
-    # Hapus spasi berlebih
     answer = re.sub(r'\n{3,}', '\n\n', answer)
     
     return answer.strip()
