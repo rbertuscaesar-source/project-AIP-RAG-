@@ -60,7 +60,7 @@ def generate_answer(question: str, context: str, history: list) -> str:
             contents=prompt,
             config=types.GenerateContentConfig(
                 temperature=0.2,
-                max_output_tokens=1024,
+                max_output_tokens=2048,
             )
         )
 

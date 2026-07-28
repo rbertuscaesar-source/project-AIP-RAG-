@@ -75,58 +75,64 @@ def hybrid_search(query, top_k=5):
 
 
 def get_context(query):
-    results = hybrid_search(query)
+    # Query expansion — tambah sinonim umum
+    expanded_query = query
+    synonyms = {
+        "pinjam": "peminjaman",
+        "ruang": "ruang fasilitas kampus",
+        "lab": "laboratorium",
+        "cuti": "cuti akademik",
+        "skripsi": "tugas akhir skripsi",
+        "daftar": "pendaftaran",
+        "sidang": "ujian sidang tugas akhir",
+        "beasiswa": "beasiswa bantuan biaya",
+    }
+    for word, expansion in synonyms.items():
+        if word in query.lower():
+            expanded_query = f"{query} {expansion}"
+            break
+
+    results = hybrid_search(expanded_query)
     
     if not results:
         return "", []
     
-    # Filter: Hanya ambil hasil dengan score > 0.3
-    filtered_results = [r for r in results if r.get("final_score", 0) > 0.3]
+    filtered_results = [r for r in results if r.get("final_score", 0) > 0.0]
     
     if not filtered_results:
-        print(f"⚠️ Tidak ada hasil dengan score > 0.3")
+        print(f"⚠️ Tidak ada hasil dengan score > 0.0")
         return "", []
     
-    # Hapus duplikat teks
     seen_texts = set()
     unique_results = []
     for item in filtered_results:
         text = item["text"].strip()
-        # Hapus teks yang terlalu pendek (kurang dari 20 karakter)
         if len(text) < 20:
             continue
-        # Hapus duplikat
         if text not in seen_texts:
             seen_texts.add(text)
             unique_results.append(item)
     
-    # Build context dengan format lebih bersih
     context_parts = []
-    for i, item in enumerate(unique_results[:3]):  # Maks 3 chunk teratas
+    for i, item in enumerate(unique_results[:3]):
         text = item["text"].strip()
         
-        # Perbaiki teks yang terpotong
         if text and not text[-1] in '.!?':
             last_sentence_end = max(
                 text.rfind('. '),
                 text.rfind('! '),
                 text.rfind('? '),
                 text.rfind('.\n'),
-                text.rfind('!\n'),
-                text.rfind('?\n')
             )
             if last_sentence_end > 0:
                 text = text[:last_sentence_end + 1]
         
-        # Hapus teks yang tidak informatif
         if text.lower().startswith("sop ini menetapkan") or text.lower().startswith("sop ini mengatur"):
             continue
         
-        # Tambahkan metadata untuk konteks
         source = item["metadata"].get("source", "unknown")
         page = item["metadata"].get("page", "?")
         context_parts.append(f"[Dari {source}, halaman {page}]\n{text}")
     
     context = "\n\n".join(context_parts)
-    
     return context, unique_results
