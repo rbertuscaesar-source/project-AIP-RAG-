@@ -105,6 +105,7 @@ def build_prompt_optimized(question: str, context: str, history: list) -> str:
 
     prompt = f"""Anda adalah asisten AI universitas yang membantu mahasiswa memahami SOP kampus.
 Jawab HANYA berdasarkan konteks yang diberikan. Sertakan detail lengkap: syarat, prosedur, batas waktu, dan biaya jika ada.
+WAJIB sebutkan nama file dokumen sumber persis seperti yang tertulis di konteks (contoh: SOP_003_Peminjaman_Ruang_Fasilitas).
 
 {history_text}
 --- KONTEKS ---
@@ -115,6 +116,7 @@ Jawab HANYA berdasarkan konteks yang diberikan. Sertakan detail lengkap: syarat,
 
 --- FORMAT WAJIB ---
 **Judul Prosedur**
+Sumber: SOP_XXX_Nama_Dokumen
 
 Langkah-langkah:
 1. ...
@@ -140,6 +142,7 @@ def force_step_numbering(text: str) -> str:
     lines = text.split('\n')
     step_items = []
     note_items = []
+    source_line = ""
     is_note_section = False
     has_title = False
     title = ""
@@ -157,15 +160,21 @@ def force_step_numbering(text: str) -> str:
         if not trimmed:
             continue
 
+        # Deteksi judul
         if trimmed.startswith('**') and trimmed.endswith('**'):
             has_title = True
             title = trimmed
             continue
 
+        # Deteksi baris sumber (Sumber: SOP_XXX_...)
+        if trimmed.lower().startswith('sumber:'):
+            source_line = trimmed
+            continue
+
         lower = trimmed.lower()
         if 'langkah-langkah' in lower or 'langkah langkah' in lower:
             continue
-        if 'catatan' in lower or 'note' in lower:
+        if lower.startswith('catatan') or lower.startswith('note'):
             is_note_section = True
             continue
 
@@ -207,6 +216,11 @@ def force_step_numbering(text: str) -> str:
 
     final_lines = []
     final_lines.append(title if has_title else '**Prosedur**')
+
+    # Tambahkan baris sumber jika ada
+    if source_line:
+        final_lines.append(source_line)
+
     final_lines.append('')
 
     if step_items:

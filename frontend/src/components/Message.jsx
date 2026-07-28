@@ -2,13 +2,15 @@ import "./Message.css";
 
 function Message({ role, text }) {
   const highlightSOP = (text, key) => {
-    if (!/SOP_\d+_\S+/.test(text)) return text;
-    return text.split(/(\bSOP_\d+_[^\s*,.:]+)/).map((part, i) =>
-      /SOP_\d+_\S+/.test(part) ? (
-        <span key={`${key}-${i}`} className="sop-citation">{part}</span>
-      ) : part
-    );
-  };
+  const sopPattern = /SOP_\d+_[\w.]+/g;
+  if (!sopPattern.test(text)) return text;
+  
+  return text.split(/(SOP_\d+_[\w.]+)/).map((part, i) =>
+    /^SOP_\d+_[\w.]+$/.test(part) ? (
+      <span key={`${key}-${i}`} className="sop-citation">{part}</span>
+    ) : part
+  );
+ };
 
   const renderText = (content) => {
     const lines = content.split("\n");
