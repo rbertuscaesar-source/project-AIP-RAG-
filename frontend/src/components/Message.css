@@ -33,3 +33,34 @@
   background: white;
   border: 1px solid #ddd;
 }
+
+.sop-citation {
+  color: #f59e0b;
+  font-weight: 600;
+  font-style: italic;
+  background-color: rgba(245, 158, 11, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.message-step {
+  margin: 4px 0;
+  padding-left: 8px;
+}
+
+.message-bullet {
+  margin: 3px 0;
+  padding-left: 16px;
+  color: #94a3b8;
+}
+
+.message-role {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.message-line {
+  margin: 2px 0;
+}
