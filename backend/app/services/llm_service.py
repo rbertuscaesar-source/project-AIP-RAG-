@@ -2,7 +2,7 @@
 
 import os
 import re
-import google.generativeai as genai  # 🔥 HANYA INI!
+import google.generativeai as genai 
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,8 +19,11 @@ if not GEMINI_API_KEY:
 
 MODEL_NAME = "gemini-2.5-flash"
 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
+    MODEL_NAME = "gemini-3.6-flash"  # 🔥 GANTI DI SINI!
     model = genai.GenerativeModel(MODEL_NAME)
     print(f"✅ Gemini API siap menggunakan model: {MODEL_NAME}")
 else:
@@ -96,8 +99,15 @@ def build_prompt_optimized(question: str, context: str, history: list) -> str:
         context = context[:2500] + "..."
 
     prompt = f"""Anda adalah asisten AI universitas yang membantu mahasiswa memahami SOP kampus.
-Jawab HANYA berdasarkan konteks yang diberikan. Sertakan detail lengkap: syarat, prosedur, batas waktu, dan biaya jika ada.
-WAJIB sebutkan nama file dokumen sumber persis seperti yang tertulis di konteks (contoh: SOP_003_Peminjaman_Ruang_Fasilitas).
+
+**ATURAN WAJIB:**
+1. Jawab HANYA berdasarkan konteks yang diberikan.
+2. Buat judul jawaban dengan format **bold**.
+3. Tulis kalimat pembuka yang menjelaskan inti jawaban.
+4. Gunakan format **Langkah-langkah:** dengan nomor (1., 2., 3., dst).
+5. Gunakan **Catatan:** untuk informasi tambahan dengan bullet (•).
+6. JANGAN menambahkan informasi di luar konteks.
+7. Jawab dalam bahasa Indonesia yang formal dan jelas.
 
 {history_text}
 --- KONTEKS ---
@@ -107,15 +117,17 @@ WAJIB sebutkan nama file dokumen sumber persis seperti yang tertulis di konteks 
 {question}
 
 --- FORMAT WAJIB ---
-**Judul Prosedur**
-Sumber: SOP_XXX_Nama_Dokumen
+**Judul Jawaban**
 
-Langkah-langkah:
+[Kalimat pembuka yang menjelaskan inti jawaban]
+
+**Langkah-langkah:**
 1. ...
 2. ...
 3. ...
 
-Catatan:
+**Catatan:**
+• ...
 • ...
 
 --- JAWABAN ---
