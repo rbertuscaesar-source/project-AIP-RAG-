@@ -2,7 +2,8 @@
 
 import os
 import re
-import google.generativeai as genai 
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,15 +20,11 @@ if not GEMINI_API_KEY:
 
 MODEL_NAME = "gemini-2.5-flash"
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    MODEL_NAME = "gemini-3.6-flash"  # 🔥 GANTI DI SINI!
-    model = genai.GenerativeModel(MODEL_NAME)
+    client = genai.Client(api_key=GEMINI_API_KEY)
     print(f"✅ Gemini API siap menggunakan model: {MODEL_NAME}")
 else:
-    model = None
+    client = None
     print("⚠️ Gemini API tidak aktif. Set GEMINI_API_KEY di file .env.")
 
 
@@ -37,10 +34,10 @@ else:
 
 def generate_answer(question: str, context: str, history: list) -> str:
     """
-    Generate jawaban menggunakan Google Gemini API.
+    Generate jawaban menggunakan Google Gemini API (google-genai package).
     """
 
-    if model is None:
+    if client is None:
         print("⚠️ Gemini tidak aktif, coba fallback ke Ollama...")
         try:
             import ollama
@@ -58,7 +55,15 @@ def generate_answer(question: str, context: str, history: list) -> str:
     prompt = build_prompt_optimized(question, context, history)
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.2,
+                max_output_tokens=2048,
+            )
+        )
+
         raw_answer = response.text
         cleaned_answer = clean_answer(raw_answer)
         formatted_answer = force_step_numbering(cleaned_answer)
@@ -99,15 +104,8 @@ def build_prompt_optimized(question: str, context: str, history: list) -> str:
         context = context[:2500] + "..."
 
     prompt = f"""Anda adalah asisten AI universitas yang membantu mahasiswa memahami SOP kampus.
-
-**ATURAN WAJIB:**
-1. Jawab HANYA berdasarkan konteks yang diberikan.
-2. Buat judul jawaban dengan format **bold**.
-3. Tulis kalimat pembuka yang menjelaskan inti jawaban.
-4. Gunakan format **Langkah-langkah:** dengan nomor (1., 2., 3., dst).
-5. Gunakan **Catatan:** untuk informasi tambahan dengan bullet (•).
-6. JANGAN menambahkan informasi di luar konteks.
-7. Jawab dalam bahasa Indonesia yang formal dan jelas.
+Jawab HANYA berdasarkan konteks yang diberikan. Sertakan detail lengkap: syarat, prosedur, batas waktu, dan biaya jika ada.
+WAJIB sebutkan nama file dokumen sumber persis seperti yang tertulis di konteks (contoh: SOP_003_Peminjaman_Ruang_Fasilitas).
 
 {history_text}
 --- KONTEKS ---
@@ -117,17 +115,15 @@ def build_prompt_optimized(question: str, context: str, history: list) -> str:
 {question}
 
 --- FORMAT WAJIB ---
-**Judul Jawaban**
+**Judul Prosedur**
+Sumber: SOP_XXX_Nama_Dokumen
 
-[Kalimat pembuka yang menjelaskan inti jawaban]
-
-**Langkah-langkah:**
+Langkah-langkah:
 1. ...
 2. ...
 3. ...
 
-**Catatan:**
-• ...
+Catatan:
 • ...
 
 --- JAWABAN ---
@@ -221,6 +217,7 @@ def force_step_numbering(text: str) -> str:
     final_lines = []
     final_lines.append(title if has_title else '**Prosedur**')
 
+    # Tambahkan baris sumber jika ada
     if source_line:
         final_lines.append(source_line)
 

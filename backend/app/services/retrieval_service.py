@@ -1,22 +1,40 @@
 # app/services/retrieval_service.py
 
+import os
 import chromadb
-from sentence_transformers import SentenceTransformer
+from google import genai
+from dotenv import load_dotenv
 from app.services.bm25_service import search_bm25
 
-# Embedding model
-model = SentenceTransformer("all-MiniLM-L6-v2")
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+EMBEDDING_MODEL = "gemini-embedding-001"
+
+# Inisialisasi Gemini client
+gemini_client = genai.Client(api_key=GEMINI_API_KEY)
 
 # ChromaDB
-client = chromadb.PersistentClient(path="chroma_db")
+chroma_client = chromadb.PersistentClient(path="chroma_db")
 
-collection = client.get_or_create_collection(
+collection = chroma_client.get_or_create_collection(
     name="documents"
 )
 
 
+def get_query_embedding(text: str) -> list:
+    """
+    Generate embedding untuk query menggunakan Gemini.
+    """
+    response = gemini_client.models.embed_content(
+        model=EMBEDDING_MODEL,
+        contents=text,
+    )
+    return response.embeddings[0].values
+
+
 def semantic_search(query, top_k=5):
-    embedding = model.encode(query).tolist()
+    embedding = get_query_embedding(query)
 
     results = collection.query(
         query_embeddings=[embedding],
@@ -24,15 +42,12 @@ def semantic_search(query, top_k=5):
     )
 
     response = []
-
     documents = results["documents"][0] if results["documents"] else []
     metadatas = results["metadatas"][0] if results["metadatas"] else []
     distances = results["distances"][0] if results["distances"] else []
 
     for doc, meta, distance in zip(documents, metadatas, distances):
-        # Konversi distance ke similarity (0-1)
         similarity = 1 / (1 + distance)
-        
         response.append({
             "text": doc,
             "metadata": meta,
@@ -50,7 +65,6 @@ def hybrid_search(query, top_k=5):
 
     fused = {}
 
-    # Semantic Search
     for rank, item in enumerate(semantic):
         key = item["text"]
         if key not in fused:
@@ -58,7 +72,6 @@ def hybrid_search(query, top_k=5):
             fused[key]["final_score"] = 0
         fused[key]["final_score"] += item["score"] * 0.6
 
-    # BM25 Search
     for rank, item in enumerate(keyword):
         key = item["text"]
         if key not in fused:
@@ -75,7 +88,7 @@ def hybrid_search(query, top_k=5):
 
 
 def get_context(query):
-    # Query expansion — tambah sinonim umum
+    # Query expansion
     expanded_query = query
     synonyms = {
         "pinjam": "peminjaman",
@@ -93,16 +106,16 @@ def get_context(query):
             break
 
     results = hybrid_search(expanded_query)
-    
+
     if not results:
         return "", []
-    
+
     filtered_results = [r for r in results if r.get("final_score", 0) > 0.0]
-    
+
     if not filtered_results:
         print(f"⚠️ Tidak ada hasil dengan score > 0.0")
         return "", []
-    
+
     seen_texts = set()
     unique_results = []
     for item in filtered_results:
@@ -112,11 +125,11 @@ def get_context(query):
         if text not in seen_texts:
             seen_texts.add(text)
             unique_results.append(item)
-    
+
     context_parts = []
     for i, item in enumerate(unique_results[:3]):
         text = item["text"].strip()
-        
+
         if text and not text[-1] in '.!?':
             last_sentence_end = max(
                 text.rfind('. '),
@@ -126,13 +139,13 @@ def get_context(query):
             )
             if last_sentence_end > 0:
                 text = text[:last_sentence_end + 1]
-        
+
         if text.lower().startswith("sop ini menetapkan") or text.lower().startswith("sop ini mengatur"):
             continue
-        
+
         source = item["metadata"].get("source", "unknown")
         page = item["metadata"].get("page", "?")
         context_parts.append(f"[Dari {source}, halaman {page}]\n{text}")
-    
+
     context = "\n\n".join(context_parts)
     return context, unique_results

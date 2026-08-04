@@ -5,36 +5,39 @@ import { uploadFile } from '../services/api';
 import './UploadBox.css';
 
 function UploadBox() {
-    const [file, setFile] = useState(null);
+    const [files, setFiles] = useState([]);
     const [uploading, setUploading] = useState(false);
-    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-        setMessage('');
+        setFiles(Array.from(e.target.files));
+        setMessages([]);
     };
 
     const handleUpload = async () => {
-        if (!file) {
-            setMessage('Pilih file terlebih dahulu');
+        if (files.length === 0) {
+            setMessages([{ text: 'Pilih file terlebih dahulu', success: false }]);
             return;
         }
 
         setUploading(true);
-        setMessage('');
+        setMessages([]);
 
-        try {
-            const response = await uploadFile(file);
-            setMessage(`✅ ${response.data.message}`);
-            setFile(null);
-            // Refresh sidebar
-            if (window.refreshSidebar) window.refreshSidebar();
-        } catch (error) {
-            const detail = error.response?.data?.detail || 'Upload gagal';
-            setMessage(`❌ ${detail}`);
-        } finally {
-            setUploading(false);
+        const results = [];
+        for (const file of files) {
+            try {
+                const response = await uploadFile(file);
+                results.push({ text: `✅ ${file.name} — ${response.data.message}`, success: true });
+            } catch (error) {
+                const detail = error.response?.data?.detail || 'Upload gagal';
+                results.push({ text: `❌ ${file.name} — ${detail}`, success: false });
+            }
         }
+
+        setMessages(results);
+        setFiles([]);
+        setUploading(false);
+        if (window.refreshSidebar) window.refreshSidebar();
     };
 
     return (
@@ -45,14 +48,29 @@ function UploadBox() {
                 <div className="upload-input-group">
                     <label className="upload-label">
                         <span>Pilih File</span>
-                        <input type="file" onChange={handleFileChange} accept=".pdf,.docx,.txt" />
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            accept=".pdf,.docx,.txt"
+                            multiple
+                        />
                     </label>
-                    <button onClick={handleUpload} disabled={!file || uploading}>
+                    <button onClick={handleUpload} disabled={files.length === 0 || uploading}>
                         {uploading ? '⏳ Uploading...' : 'Upload'}
                     </button>
                 </div>
-                {file && <span className="file-name">📎 {file.name}</span>}
-                {message && <span className={`upload-message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</span>}
+                {files.length > 0 && (
+                    <div className="file-names">
+                        {files.map((f, i) => (
+                            <span key={i} className="file-name">📎 {f.name}</span>
+                        ))}
+                    </div>
+                )}
+                {messages.map((msg, i) => (
+                    <span key={i} className={`upload-message ${msg.success ? 'success' : 'error'}`}>
+                        {msg.text}
+                    </span>
+                ))}
             </div>
         </div>
     );
