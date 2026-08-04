@@ -8,14 +8,15 @@ Enterprise RAG Assistant is an AI-powered **Retrieval-Augmented Generation (RAG)
 
 ## ✨ Features
 
-- 📄 **Document Upload** — Supports PDF, DOCX, TXT formats
-- 🔍 **Hybrid Search** — Combines Semantic Search (Embedding) and Keyword Search (BM25)
-- 💬 **AI Chat** — Interactive Q&A based on document context using Google Gemini
+- 📄 **Document Upload** — Supports PDF, DOCX, TXT formats (multi-file upload)
+- 🔍 **Hybrid Search** — Combines Semantic Search (Gemini Embedding) and Keyword Search (BM25)
+- 💬 **AI Chat** — Interactive Q&A based on document context using Google Gemini 2.5 Flash
 - 📋 **Structured Responses** — Numbered steps and bullet point notes with source citation
 - 📂 **Document Sidebar** — View all uploaded documents and chunk count
 - 🗑️ **Delete Documents** — Remove from database and physical folder
 - 📤 **Export Chat History** — Export to TXT and PDF formats
-- 🎨 **Modern UI** — Responsive with gradients and animations
+- 📱 **Responsive UI** — Works on both desktop and mobile browsers
+- 🌐 **Single Port** — Frontend served directly from backend (port 8000)
 
 ---
 
@@ -23,16 +24,16 @@ Enterprise RAG Assistant is an AI-powered **Retrieval-Augmented Generation (RAG)
 
 ### Backend
 - **FastAPI** — Python API Framework
-- **Google Gemini API** (`gemini-2.5-flash`) — LLM for answer generation
+- **Google Gemini 2.5 Flash** — LLM for answer generation
+- **Google Gemini Embedding** (`gemini-embedding-001`) — Vector embedding model
 - **ChromaDB** — Vector Database for semantic search
-- **Sentence-Transformers** (`all-MiniLM-L6-v2`) — Embedding model
 - **BM25** (`rank-bm25`) — Keyword search
-- **PyMuPDF + python-docx** — Document parsing
+- **PyMuPDF + python-docx** — Document parsing (PDF, DOCX, TXT)
 
 ### Frontend
 - **React + Vite** — UI Framework
 - **Axios** — HTTP Client
-- **CSS3** — Modern styling with gradients and animations
+- **CSS3** — Responsive styling with gradients and animations
 
 ---
 
@@ -47,7 +48,7 @@ cd project-AIP-RAG-
 
 ### 2. Setup Environment
 
-Copy the example env file and fill in your API key:
+Copy the example env file:
 
 ```bash
 cp .env.example backend/.env
@@ -70,11 +71,11 @@ python -m venv venv
 # Activate (Windows)
 venv\Scripts\activate
 
-# Install dependencies
+# Install dependencies (from backend folder)
+cd backend
 pip install -r requirements.txt
 
 # Run backend server
-cd backend
 uvicorn app.main:app --reload
 ```
 
@@ -86,12 +87,20 @@ npm install
 npm run dev
 ```
 
-### 5. Open Application
+> For production/demo, skip this step — the backend already serves the built frontend at port 8000.
 
-- **Full app (backend serves frontend):** http://localhost:8000
-- **Frontend dev server only:** http://localhost:5173
+### 5. Build Frontend (for production)
 
-> For production/demo, only run the backend — it already serves the built frontend at port 8000.
+```bash
+cd frontend
+npm install
+npm run build
+```
+
+### 6. Open Application
+
+- **Full app (recommended):** http://localhost:8000
+- **Frontend dev only:** http://localhost:5173
 
 ---
 
@@ -101,10 +110,14 @@ To share with others without deploying, use ngrok:
 
 ```bash
 # Install ngrok from https://ngrok.com/download
-ngrok http 8000
+# Add your authtoken first:
+ngrok config add-authtoken YOUR_TOKEN
+
+# Expose the app (use static domain if available):
+ngrok http --url=your-static-domain.ngrok-free.dev 8000
 ```
 
-Share the generated URL (e.g. `https://xxxx.ngrok-free.app`) with anyone — no installation needed on their end.
+Share the generated URL with anyone — no installation needed on their end. Works on both desktop and mobile browsers.
 
 ---
 
@@ -119,14 +132,14 @@ project-AIP-RAG-/
 │   │   └── main.py       # App entry point + static file serving
 │   ├── uploads/          # Uploaded SOP documents
 │   ├── chroma_db/        # Vector database (auto-generated)
+│   ├── requirements.txt  # Python dependencies
 │   └── .env              # API keys (not committed)
 ├── frontend/
 │   ├── src/
 │   │   ├── components/   # React components
 │   │   └── services/     # API service layer
 │   └── dist/             # Built frontend (served by backend)
-├── .env.example           # Environment variable template
-├── requirements.txt       # Python dependencies
+├── .env.example          # Environment variable template
 └── README.md
 ```
 
@@ -134,9 +147,11 @@ project-AIP-RAG-/
 
 ## 📸 Screenshots
 
-<img width="955" height="443" alt="Enterprise RAG Assistant UI" src="https://github.com/user-attachments/assets/407f1e1f-31d8-4bf9-af5f-edd9a8a82b67" />
+### Desktop
+<img width="955" height="443" alt="Enterprise RAG Assistant Desktop UI" src="https://github.com/user-attachments/assets/407f1e1f-31d8-4bf9-af5f-edd9a8a82b67" />
 
 ---
 
 ## 👥 Team
 
+Built by students of Universitas Nusantara Teknologi as part of the AI Project Management course (2024/2025).
