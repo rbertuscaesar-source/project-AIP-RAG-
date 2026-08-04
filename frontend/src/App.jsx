@@ -12,6 +12,7 @@ import { sendQuestion } from "./services/api";
 function App() {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const handleSend = async (question) => {
         if (!question.trim()) return;
@@ -44,13 +45,30 @@ function App() {
         <div className="app">
             <Header />
             <div className="content">
-                <Sidebar />
+                {/* Overlay untuk close sidebar di mobile */}
+                <div
+                    className={`sidebar-overlay ${sidebarOpen ? "open" : ""}`}
+                    onClick={() => setSidebarOpen(false)}
+                />
+
+                {/* Sidebar dengan class open di mobile */}
+                <Sidebar className={sidebarOpen ? "open" : ""} />
+
                 <div className="main">
                     <UploadBox />
                     <ChatBox messages={messages} />
-                    <InputBox onSend={handleSend} />
+                    <InputBox onSend={handleSend} loading={loading} />
                 </div>
             </div>
+
+            {/* Toggle button khusus mobile */}
+            <button
+                className="sidebar-toggle"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                title="Toggle Documents"
+            >
+                📁
+            </button>
         </div>
     );
 }

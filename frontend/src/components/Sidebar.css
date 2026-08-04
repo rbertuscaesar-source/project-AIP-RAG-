@@ -10,6 +10,7 @@
     flex-direction: column;
     overflow: hidden;
     padding: 16px 12px;
+    transition: transform 0.3s ease;
 }
 
 .sidebar-header {
@@ -191,19 +192,52 @@
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
+/* ===== MOBILE OVERLAY ===== */
+.sidebar-overlay {
+    display: none;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .sidebar {
-        width: 240px;
-        min-width: 200px;
-        padding: 12px 8px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        min-width: unset;
+        z-index: 1000;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 20px rgba(0,0,0,0.15);
     }
-    
-    .sidebar-header h3 {
-        font-size: 14px;
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.4);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .doc-delete {
+        opacity: 1;
     }
 }

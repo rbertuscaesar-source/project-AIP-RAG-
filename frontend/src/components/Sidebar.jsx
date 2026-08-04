@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getDocuments, deleteDocument } from '../services/api';
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({ className = '' }) {
     const [documents, setDocuments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deleting, setDeleting] = useState(null);
@@ -36,10 +36,11 @@ function Sidebar() {
 
     useEffect(() => {
         loadDocuments();
+        window.refreshSidebar = loadDocuments;
     }, []);
 
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${className}`}>
             <div className="sidebar-header">
                 <h3>📂 Documents</h3>
                 <button className="refresh-btn" onClick={loadDocuments} disabled={loading}>
