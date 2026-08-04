@@ -1,0 +1,760 @@
+{
+  "metadata": {
+    "date": "2026-08-04 16:29:33",
+    "total_questions": 48,
+    "model": "gemini-2.5-flash",
+    "embedding": "gemini-embedding-001"
+  },
+  "summary": {
+    "correct": 38,
+    "partial": 3,
+    "wrong": 7,
+    "accuracy_score": 82.3,
+    "avg_response_time": 6.91
+  },
+  "results": [
+    {
+      "question": "Apa tujuan dari SOP Pendaftaran Mahasiswa Baru?",
+      "keywords": [
+        "pendaftaran",
+        "sistematis",
+        "tertib",
+        "transparan"
+      ],
+      "matched": [
+        "pendaftaran",
+        "sistematis",
+        "tertib",
+        "transparan"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 12.73,
+      "answer_preview": "**pendaftaran mahasiswa baru**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. prosedur ini bertujuan untuk mengatur dan menetapkan alur pendaftaran mahasiswa baru secara siste"
+    },
+    {
+      "question": "Jalur apa saja yang tersedia untuk pendaftaran mahasiswa baru?",
+      "keywords": [
+        "SNBP",
+        "SNBT",
+        "Mandiri"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 6.09,
+      "answer_preview": "**pendaftaran mahasiswa baru**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. prosedur ini bertujuan untuk mengatur dan menetapkan alur pendaftaran mahasiswa baru secara siste"
+    },
+    {
+      "question": "Apa yang dimaksud dengan NIM?",
+      "keywords": [
+        "Nomor Induk Mahasiswa",
+        "Biro Administrasi Akademik"
+      ],
+      "matched": [
+        "Nomor Induk Mahasiswa",
+        "Biro Administrasi Akademik"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 7.03,
+      "answer_preview": "**catatan:**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. nim adalah nomor induk mahasiswa yang diterbitkan oleh biro administrasi akademik setelah calon mahasiswa baru (cmb"
+    },
+    {
+      "question": "Bagaimana prosedur pengisian formulir pendaftaran mahasiswa baru?",
+      "keywords": [
+        "online",
+        "portal",
+        "pmb.universitasnusantara"
+      ],
+      "matched": [
+        "online",
+        "portal",
+        "pmb.universitasnusantara"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.58,
+      "answer_preview": "**catatan:**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. calon mahasiswa baru (cmb) mengisi formulir pendaftaran ulang secara online.\n2. pengisian formulir dilakukan melalu"
+    },
+    {
+      "question": "Berapa lama batas waktu pembayaran UKT setelah pengisian formulir?",
+      "keywords": [
+        "3x24 jam",
+        "bank"
+      ],
+      "matched": [
+        "3x24 jam",
+        "bank"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.46,
+      "answer_preview": "**batas waktu pembayaran ukt**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. pembayaran uang kuliah tunggal (ukt) semester pertama dan biaya pengembangan institusi harus dila"
+    },
+    {
+      "question": "Dokumen apa saja yang harus diserahkan saat pengumpulan berkas pendaftaran?",
+      "keywords": [
+        "ijazah",
+        "KTP",
+        "pas foto",
+        "pembayaran"
+      ],
+      "matched": [
+        "ijazah",
+        "KTP",
+        "pas foto",
+        "pembayaran"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.09,
+      "answer_preview": "**catatan:**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. calon mahasiswa baru (cmb) menyerahkan berkas fisik ke gedung rektorat lantai 1 — loket pmb.\n2. berkas yang harus d"
+    },
+    {
+      "question": "Berapa lama proses verifikasi berkas pendaftaran mahasiswa baru?",
+      "keywords": [
+        "2 hari kerja"
+      ],
+      "matched": [
+        "2 hari kerja"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 12.76,
+      "answer_preview": "**catatan:**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. panitia pmb melakukan verifikasi keaslian dan kelengkapan berkas dalam waktu **2 hari kerja**.\n2. jika berkas tidak"
+    },
+    {
+      "question": "Berapa lama NIM dan KTM diterbitkan setelah verifikasi berkas selesai?",
+      "keywords": [
+        "3 hari kerja"
+      ],
+      "matched": [
+        "3 hari kerja"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.24,
+      "answer_preview": "**judul prosedur**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. biro administrasi akademik menerbitkan nim dan kartu tanda mahasiswa (ktm) digital.\n2. penerbitan dilakukan d"
+    },
+    {
+      "question": "Apa konsekuensi jika calon mahasiswa tidak menyelesaikan pendaftaran ulang tepat waktu?",
+      "keywords": [
+        "mengundurkan diri",
+        "cadangan"
+      ],
+      "matched": [
+        "mengundurkan diri",
+        "cadangan"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.65,
+      "answer_preview": "**catatan:**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. calon mahasiswa baru (cmb) yang tidak menyelesaikan proses pendaftaran ulang dalam batas waktu yang ditentukan diny"
+    },
+    {
+      "question": "Apakah orientasi mahasiswa baru wajib diikuti?",
+      "keywords": [
+        "wajib",
+        "OMBA",
+        "pembatalan"
+      ],
+      "matched": [
+        "wajib",
+        "OMBA",
+        "pembatalan"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 7.3,
+      "answer_preview": "**judul prosedur**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. orientasi mahasiswa baru (omba) wajib diikuti oleh calon mahasiswa baru yang telah memiliki nim.\n2. ketidakha"
+    },
+    {
+      "question": "Apa syarat untuk mengajukan judul tugas akhir atau skripsi?",
+      "keywords": [
+        "120 SKS",
+        "IPK",
+        "2.50",
+        "Metodologi Penelitian"
+      ],
+      "matched": [
+        "120 SKS",
+        "IPK",
+        "2.50",
+        "Metodologi Penelitian"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 9.89,
+      "answer_preview": "**catatan:**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. pengajuan judul tugas akhir\n2. telah menempuh minimal 120 sks dengan ipk >= 2.50.\n3. telah lulus mata kuliah metod"
+    },
+    {
+      "question": "Bagaimana prosedur pengajuan judul tugas akhir?",
+      "keywords": [
+        "Dosen Wali",
+        "Form TA-01",
+        "Koordinator"
+      ],
+      "matched": [
+        "Dosen Wali",
+        "Form TA-01",
+        "Koordinator"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 11.77,
+      "answer_preview": "**catatan:**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. pengajuan judul tugas akhir\n2. **konsultasi awal dengan dosen wali**: mahasiswa berkonsultasi dengan dosen wali ak"
+    },
+    {
+      "question": "Berapa banyak bimbingan minimum dengan dosen pembimbing utama?",
+      "keywords": [
+        "8 kali",
+        "DPU"
+      ],
+      "matched": [
+        "8 kali",
+        "DPU"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 11.5,
+      "answer_preview": "**judul prosedur**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. pengajuan judul tugas akhir\n2. mahasiswa wajib melaksanakan bimbingan minimal 8 kali pertemuan dengan dosen "
+    },
+    {
+      "question": "Berapa maksimal mahasiswa yang bisa dibimbing satu dosen per semester?",
+      "keywords": [
+        "8 mahasiswa"
+      ],
+      "matched": [
+        "8 mahasiswa"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 8.51,
+      "answer_preview": "**judul prosedur**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. maks. 8 mahasiswa per dosen per semester.\n\n**catatan:**\n• ...\n• ...\n• dosen maksimal membimbing 8 mahasiswa "
+    },
+    {
+      "question": "Apa yang harus diserahkan saat mendaftar sidang tugas akhir?",
+      "keywords": [
+        "4 eksemplar",
+        "Form TA-04",
+        "Kartu Bimbingan"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 8.38,
+      "answer_preview": "**catatan:**\n\n**langkah-langkah:**\n1. saat mendaftar sidang tugas akhir, mahasiswa harus menyerahkan:\n\n**catatan:**\n• ..."
+    },
+    {
+      "question": "Apa sanksi jika mahasiswa tidak menyelesaikan tugas akhir dalam 2 semester?",
+      "keywords": [
+        "pendaftaran ulang",
+        "evaluasi akademik"
+      ],
+      "matched": [
+        "pendaftaran ulang"
+      ],
+      "match_rate": 0.5,
+      "status": "⚠️  PARTIAL",
+      "response_time": 6.39,
+      "answer_preview": "**judul prosedur**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. sanksi jika mahasiswa tidak menyelesaikan tugas akhir dalam 2 semester adalah **pendaftaran ulang pengajuan "
+    },
+    {
+      "question": "Berapa lama proses evaluasi judul tugas akhir oleh Koordinator TA?",
+      "keywords": [
+        "7 hari kerja"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 6.81,
+      "answer_preview": "**judul prosedur**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. pengumpulan dan penyusunan proposal judul tugas akhir oleh mahasiswa.\n2. koordinator tugas akhir program stu"
+    },
+    {
+      "question": "Di mana formulir pengajuan judul tugas akhir dapat diperoleh?",
+      "keywords": [
+        "Sekretariat",
+        "akademik.universitasnusantara"
+      ],
+      "matched": [
+        "Sekretariat",
+        "akademik.universitasnusantara"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.91,
+      "answer_preview": "**catatan:**\nsumber: sop_002_pengajuan_judul_tugas_akhir.pdf\n\n**langkah-langkah:**\n1. formulir pengajuan judul tugas akhir dapat diperoleh di **sekretariat program studi** atau diunduh dari laman akad"
+    },
+    {
+      "question": "Apa tujuan SOP Peminjaman Ruang dan Fasilitas Kampus?",
+      "keywords": [
+        "peminjaman",
+        "ruang kuliah",
+        "aula",
+        "laboratorium"
+      ],
+      "matched": [
+        "peminjaman",
+        "ruang kuliah",
+        "aula",
+        "laboratorium"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 7.1,
+      "answer_preview": "**catatan:**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. prosedur ini mengatur mekanisme peminjaman ruang kuliah, aula, laboratorium, dan fasilitas kampus lainnya untuk keg"
+    },
+    {
+      "question": "Berapa kapasitas aula utama di Universitas Nusantara Teknologi?",
+      "keywords": [
+        "500 orang"
+      ],
+      "matched": [
+        "500 orang"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.23,
+      "answer_preview": "**judul prosedur**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. kapasitas aula utama di universitas nusantara teknologi adalah **500 orang**.\n\n**catatan:**\n• ...\n• ...\n• ..."
+    },
+    {
+      "question": "Berapa jauh hari sebelumnya harus mengajukan peminjaman ruang?",
+      "keywords": [
+        "3 hari kerja",
+        "SIMFAS"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 7.36,
+      "answer_preview": "**judul prosedur**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. peminjaman ruang kuliah, aula, laboratorium, dan fasilitas kampus lainnya wajib dilakukan maksimal **7 hari**"
+    },
+    {
+      "question": "Siapa yang harus memberikan persetujuan untuk kegiatan berskala besar?",
+      "keywords": [
+        "Wakil Rektor II",
+        "100 orang"
+      ],
+      "matched": [
+        "Wakil Rektor II",
+        "100 orang"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 7.22,
+      "answer_preview": "**judul prosedur**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. untuk kegiatan yang melibatkan pihak eksternal atau berskala besar (> 100 orang), persetujuan tambahan dari *"
+    },
+    {
+      "question": "Bagaimana cara mengambil kunci ruangan setelah peminjaman disetujui?",
+      "keywords": [
+        "Pos Satpam",
+        "Surat Izin",
+        "KTM",
+        "30 menit"
+      ],
+      "matched": [
+        "Pos Satpam",
+        "Surat Izin",
+        "KTM",
+        "30 menit"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.33,
+      "answer_preview": "**judul prosedur**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. pemohon harus menunjukkan surat izin penggunaan dan ktm saat mengambil kunci ruangan di pos satpam utama.\n2. "
+    },
+    {
+      "question": "Apa yang dilarang selama menggunakan fasilitas kampus?",
+      "keywords": [
+        "memindahkan perabot",
+        "makanan",
+        "merokok"
+      ],
+      "matched": [
+        "makanan",
+        "merokok"
+      ],
+      "match_rate": 0.67,
+      "status": "✅ CORRECT",
+      "response_time": 5.54,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. dilarang membawa makanan, minuman, atau merokok di dalam laboratorium.\n2. pengguna wajib menggunakan sandal a"
+    },
+    {
+      "question": "Apa yang terjadi jika ada kerusakan fasilitas kampus selama peminjaman?",
+      "keywords": [
+        "Berita Acara",
+        "tanggung jawab"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 5.88,
+      "answer_preview": "**judul prosedur**\nsumber: sop_006_kerusakan_fasilitas_kampus.pdf\n\n**langkah-langkah:**\n1. pemohon wajib melaporkan kerusakan fasilitas kampus ke petugas keamanan atau kepala laboratorium sesuai denga"
+    },
+    {
+      "question": "Apa ketentuan umum untuk mengajukan cuti akademik?",
+      "keywords": [
+        "2 semester aktif",
+        "maksimal",
+        "kumulatif"
+      ],
+      "matched": [
+        "2 semester aktif",
+        "maksimal",
+        "kumulatif"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.17,
+      "answer_preview": "**judul prosedur**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. cuti akademik hanya dapat diajukan oleh mahasiswa yang telah menempuh minimal 2 semester aktif.\n2. cuti akademik"
+    },
+    {
+      "question": "Apa saja alasan yang dapat diterima untuk pengajuan cuti akademik?",
+      "keywords": [
+        "Kesehatan",
+        "Keluarga",
+        "Ekonomi",
+        "rawat inap"
+      ],
+      "matched": [
+        "Kesehatan",
+        "Keluarga",
+        "rawat inap"
+      ],
+      "match_rate": 0.75,
+      "status": "✅ CORRECT",
+      "response_time": 6.17,
+      "answer_preview": "**judul prosedur**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. pengajuan cuti wajib dilakukan sebelum periode registrasi semester yang bersangkutan berakhir.\n2. alasan yang da"
+    },
+    {
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "keywords": [
+        "Dosen Wali",
+        "Form CUTI-01",
+        "Ketua Program Studi",
+        "Wakil Rektor"
+      ],
+      "matched": [
+        "Dosen Wali",
+        "Form CUTI-01",
+        "Ketua Program Studi"
+      ],
+      "match_rate": 0.75,
+      "status": "✅ CORRECT",
+      "response_time": 7.29,
+      "answer_preview": "**catatan:**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. **konsultasi dengan dosen wali:** mahasiswa berkonsultasi dengan dosen wali untuk mendapatkan surat rekomendasi cuti.\n"
+    },
+    {
+      "question": "Berapa lama proses persetujuan cuti akademik oleh Ketua Program Studi?",
+      "keywords": [
+        "3 hari kerja"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 6.85,
+      "answer_preview": "**judul prosedur**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. **konsultasi dengan dosen wali:** mahasiswa berkonsultasi dengan dosen wali untuk mendapatkan surat rekomendasi "
+    },
+    {
+      "question": "Bagaimana cara aktivasi kembali setelah cuti akademik?",
+      "keywords": [
+        "reaktivasi",
+        "2 minggu",
+        "Biro Administrasi Akademik"
+      ],
+      "matched": [
+        "reaktivasi",
+        "2 minggu",
+        "Biro Administrasi Akademik"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 7.03,
+      "answer_preview": "**catatan:**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. **konsultasi dengan dosen wali:** mahasiswa berkonsultasi dengan dosen wali untuk mendapatkan surat rekomendasi cuti.\n"
+    },
+    {
+      "question": "Apakah mahasiswa cuti akademik tetap dikenakan biaya UKT?",
+      "keywords": [
+        "tidak",
+        "UKT"
+      ],
+      "matched": [
+        "tidak",
+        "UKT"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.52,
+      "answer_preview": "**catatan:**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. mahasiswa dalam status cuti tidak berhak mengikuti kegiatan akademik, menggunakan fasilitas kampus, dan **tidak dikena"
+    },
+    {
+      "question": "Berapa maksimal cuti akademik yang bisa diambil selama masa studi?",
+      "keywords": [
+        "2 semester",
+        "kumulatif"
+      ],
+      "matched": [],
+      "match_rate": 0.0,
+      "status": "❌ WRONG",
+      "response_time": 7.59,
+      "answer_preview": "**penjelasan:**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. **konsultasi dengan dosen wali:** mahasiswa berkonsultasi dengan dosen wali untuk mendapatkan surat rekomendasi cut"
+    },
+    {
+      "question": "Apakah masa cuti akademik dihitung sebagai masa studi?",
+      "keywords": [
+        "tidak dihitung",
+        "masa studi aktif",
+        "batas waktu"
+      ],
+      "matched": [
+        "tidak dihitung",
+        "masa studi aktif",
+        "batas waktu"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.24,
+      "answer_preview": "**masa cuti akademik dan masa studi**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. **ketentuan umum:** cuti akademik hanya dapat diajukan oleh mahasiswa yang telah menempuh min"
+    },
+    {
+      "question": "Apa tata tertib yang harus dipatuhi saat menggunakan laboratorium komputer?",
+      "keywords": [
+        "KTM",
+        "buku tamu",
+        "sandal anti-statis",
+        "dilarang"
+      ],
+      "matched": [
+        "buku tamu",
+        "sandal anti-statis",
+        "dilarang"
+      ],
+      "match_rate": 0.75,
+      "status": "✅ CORRECT",
+      "response_time": 6.48,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. **tanda tangan dan buku tamu:** setiap pengguna wajib menunjukkan ktp dan mencatat nama di buku tamu sebelum "
+    },
+    {
+      "question": "Sampai jam berapa laboratorium komputer buka pada hari kerja?",
+      "keywords": [
+        "21.00",
+        "WIB"
+      ],
+      "matched": [
+        "21.00",
+        "WIB"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.68,
+      "answer_preview": "**judul prosedur**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. **jam operasional:** laboratorium komputer buka hingga pukul 21.00 wib pada hari kerja.\n2. **jam operas"
+    },
+    {
+      "question": "Bagaimana cara memesan slot waktu untuk menggunakan laboratorium komputer?",
+      "keywords": [
+        "SML",
+        "Petugas Laboratorium",
+        "7 hari",
+        "1 hari"
+      ],
+      "matched": [
+        "SML",
+        "Petugas Laboratorium"
+      ],
+      "match_rate": 0.5,
+      "status": "⚠️  PARTIAL",
+      "response_time": 6.49,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. **pemesanan slot waktu:** pengguna wajib memesan slot waktu untuk menggunakan laboratorium di luar jadwal per"
+    },
+    {
+      "question": "Di mana data dan file harus disimpan saat menggunakan laboratorium komputer?",
+      "keywords": [
+        "Google Drive",
+        "cloud",
+        "tidak lokal"
+      ],
+      "matched": [
+        "Google Drive",
+        "cloud"
+      ],
+      "match_rate": 0.67,
+      "status": "✅ CORRECT",
+      "response_time": 5.31,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. data dan file yang dihasilkan wajib disimpan di google drive atau repositori cloud universitas.\n2. laboratori"
+    },
+    {
+      "question": "Bagaimana cara login di laboratorium komputer?",
+      "keywords": [
+        "SSO",
+        "username",
+        "password",
+        "audit log"
+      ],
+      "matched": [
+        "SSO",
+        "username",
+        "password",
+        "audit log"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.22,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. **login menggunakan username dan password akun universitas (sso).**\n2. seluruh aktivitas pengguna tercatat da"
+    },
+    {
+      "question": "Apa yang harus dilakukan sebelum meninggalkan laboratorium komputer?",
+      "keywords": [
+        "logout",
+        "monitor",
+        "laboran"
+      ],
+      "matched": [
+        "logout",
+        "monitor"
+      ],
+      "match_rate": 0.67,
+      "status": "✅ CORRECT",
+      "response_time": 5.33,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. **melaporkan kondisi komputer ke labran sebelum meninggalkan laboratorium.**\n\n**catatan:**\n• *logout dari sem"
+    },
+    {
+      "question": "Berapa kapasitas laboratorium komputer di Universitas Nusantara Teknologi?",
+      "keywords": [
+        "30 orang"
+      ],
+      "matched": [
+        "30 orang"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.36,
+      "answer_preview": "**langkah-langkah:**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. kapasitas laboratorium komputer di universitas nusantara teknologi adalah 30 orang.\n\n**catatan:**\n• ..."
+    },
+    {
+      "question": "Apakah satu pengguna boleh menggunakan lebih dari satu komputer di laboratorium?",
+      "keywords": [
+        "1 unit",
+        "Kepala Laboratorium"
+      ],
+      "matched": [
+        "1 unit",
+        "Kepala Laboratorium"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.33,
+      "answer_preview": "**catatan:**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. pengguna hanya diperbolehkan menggunakan 1 unit komputer kecuali ada kebutuhan khusus yang disetujui kepala l"
+    },
+    {
+      "question": "Dimana lokasi pengumpulan berkas pendaftaran mahasiswa baru?",
+      "keywords": [
+        "Gedung Rektorat",
+        "Loket PMB",
+        "lantai 1"
+      ],
+      "matched": [
+        "Gedung Rektorat",
+        "Loket PMB",
+        "lantai 1"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.79,
+      "answer_preview": "**catatan:**\nsumber: sop_005_pengumpulan_berkas_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. pengumpulan berkas pendaftaran mahasiswa baru dilakukan di gedung rektorat lantai 1 — loket pmb."
+    },
+    {
+      "question": "Apa yang dimaksud dengan Panitia PMB?",
+      "keywords": [
+        "tim",
+        "Rektor",
+        "Penerimaan Mahasiswa Baru"
+      ],
+      "matched": [
+        "tim",
+        "Rektor",
+        "Penerimaan Mahasiswa Baru"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.42,
+      "answer_preview": "**catatan:**\nsumber: sop_001_pendaftaran_mahasiswa_baru.pdf\n\n**langkah-langkah:**\n1. panitia pmb adalah tim yang dibentuk oleh rektor untuk mengelola proses penerimaan mahasiswa baru.\n2. panitia pmb m"
+    },
+    {
+      "question": "Bagaimana cara mendapatkan Surat Izin Penggunaan fasilitas kampus?",
+      "keywords": [
+        "SIMFAS",
+        "otomatis",
+        "diunduh"
+      ],
+      "matched": [
+        "otomatis",
+        "diunduh"
+      ],
+      "match_rate": 0.67,
+      "status": "✅ CORRECT",
+      "response_time": 5.62,
+      "answer_preview": "**langkah-langkah:**\nsumber: sop_003_peminjaman_ruang_fasilitas.pdf\n\n**langkah-langkah:**\n1. setelah disetujui, sistem menerbitkan surat izin penggunaan fasilitas secara otomatis yang dapat diunduh pe"
+    },
+    {
+      "question": "Siapa yang mengesahkan cuti akademik secara final?",
+      "keywords": [
+        "Wakil Rektor I",
+        "5 hari kerja"
+      ],
+      "matched": [
+        "Wakil Rektor I",
+        "5 hari kerja"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 6.03,
+      "answer_preview": "**judul prosedur**\nsumber: sop_004_pengajuan_cuti_akademik.pdf\n\n**langkah-langkah:**\n1. formulir yang disetujui ketua prodi diajukan ke wakil rektor i bidang akademik untuk pengesahan akhir.\n2. penges"
+    },
+    {
+      "question": "Melalui sistem apa peminjaman fasilitas kampus diajukan?",
+      "keywords": [
+        "SIMFAS",
+        "fasilitas.universitasnusantara"
+      ],
+      "matched": [
+        "SIMFAS",
+        "fasilitas.universitasnusantara"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 7.5,
+      "answer_preview": "**catatan:**\n\n**langkah-langkah:**\n1. melalui sistem **sistem informasi manajemen fasilitas (simfas)** di laman fasilitas.universitasnusantara.ac.id.\n2. pemohon (mahasiswa/dosen/unit kerja) mengajukan"
+    },
+    {
+      "question": "Apa yang dimaksud dengan Form TA-01?",
+      "keywords": [
+        "Formulir Pengajuan Judul",
+        "3 pilihan",
+        "latar belakang"
+      ],
+      "matched": [
+        "Formulir Pengajuan Judul"
+      ],
+      "match_rate": 0.33,
+      "status": "⚠️  PARTIAL",
+      "response_time": 5.16,
+      "answer_preview": "**catatan:**\n\n**langkah-langkah:**\n1. form ta-01 adalah **formulir pengajuan judul tugas akhir (form ta-01)** yang tersedia di sekretariat program studi atau diunduh dari laman akademik.universitasnus"
+    },
+    {
+      "question": "Sampai jam berapa laboratorium komputer buka pada hari Sabtu?",
+      "keywords": [
+        "16.00",
+        "Sabtu"
+      ],
+      "matched": [
+        "16.00",
+        "Sabtu"
+      ],
+      "match_rate": 1.0,
+      "status": "✅ CORRECT",
+      "response_time": 5.23,
+      "answer_preview": "**judul prosedur**\nsumber: sop_005_penggunaan_laboratorium_komputer.pdf\n\n**langkah-langkah:**\n1. laboratorium dapat digunakan hingga pukul 21.00 wib pada hari kerja dan 16.00 wib pada hari sabtu.\n\n**c"
+    }
+  ]
+}
